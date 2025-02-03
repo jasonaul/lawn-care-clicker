@@ -39,11 +39,12 @@ let cashText, totalMowsText, lifetimeEarningsText;
 let lawn;
 
 // Upgrade List with Scaling Costs
-const upgrades = [
+window.upgrades = [
     { name: "Better Mower", baseCost: 10, cost: 10, effect: 1, count: 0 },
     { name: "Electric Mower", baseCost: 50, cost: 50, effect: 2, count: 0 },
     { name: "Riding Mower", baseCost: 200, cost: 200, effect: 5, count: 0 }
 ];
+
 
 let upgradeButtons = [];
 
@@ -67,6 +68,11 @@ function create() {
         fontSize: '24px', 
         fill: '#fff' 
     }).setOrigin(0.5);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        renderUpgrades(); // Ensure upgrades render after the page fully loads
+    });
+    
 
     // ✅ Render upgrades correctly
     renderUpgrades();
@@ -132,20 +138,54 @@ function createClickEffect(x, y, amount, scene) {
 // ✅ Render Upgrades Properly in the Right Panel
 function renderUpgrades() {
     let upgradeContainer = document.getElementById('upgrade-list');
-    upgradeContainer.innerHTML = ''; 
+    upgradeContainer.innerHTML = ''; // Clear old content
 
     upgrades.forEach((upgrade, index) => {
-        let button = document.createElement('button');
-        button.classList.add('upgrade-button'); 
-        button.innerText = getUpgradeText(upgrade);
+        let upgradeLevel = upgrade.count + 1 || 1; 
+        let upgradeIteration = 1;
 
-        button.onclick = () => purchaseUpgrade(index);
+        let button = document.createElement('div');
+        button.classList.add('upgrade-button');
+
+        // Convert upgrade name to a valid folder structure
+        let upgradeType = upgrade.name.toLowerCase().replace(/\s+/g, "_");
+
+        // 🔥 Debugging log to confirm correct image paths
+        let imagePath = `/assets/upgrades/${upgradeType}/${upgradeLevel}_${upgradeType}_v${upgradeIteration}.png`;
+        console.log(`Upgrade ${index + 1}: ${upgrade.name} → ${imagePath}`);
+
+        // Apply the background image
+        button.style.backgroundImage = `url('${imagePath}')`;
+
+        // Text Overlay
+        let textOverlay = document.createElement('div');
+        textOverlay.classList.add('upgrade-text');
+
+        let title = document.createElement('div');
+        title.classList.add('upgrade-title');
+        title.innerText = upgrade.name;
+
+        let costInfo = document.createElement('div');
+        costInfo.classList.add('upgrade-info');
+        costInfo.innerText = `Cost: $${upgrade.cost}`;
+
+        let countInfo = document.createElement('div');
+        countInfo.classList.add('upgrade-info');
+        countInfo.innerText = `Owned: ${upgrade.count}`;
+
+        textOverlay.appendChild(title);
+        textOverlay.appendChild(costInfo);
+        textOverlay.appendChild(countInfo);
+        button.appendChild(textOverlay);
+
+        // ✅ Append button to the upgrade container
         upgradeContainer.appendChild(button);
-        upgradeButtons.push(button);
     });
 
-    console.log("Upgrades successfully rendered!");
+    console.log("✅ Upgrades successfully rendered!");
 }
+
+
 
 // ✅ Purchase Upgrade
 function purchaseUpgrade(index) {
@@ -171,3 +211,5 @@ function getUpgradeText(upgrade) {
     if (!upgrade || typeof upgrade !== 'object') return "Unknown Upgrade"; 
     return `${upgrade.name} ($${upgrade.cost}) - Owned: ${upgrade.count}`;
 }
+
+

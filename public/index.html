@@ -89,23 +89,78 @@
     pointer-events: auto; /* ✅ Ensures UI elements can be clicked */
 }
 
-    /* Right Panel (Upgrades) */
-    #right-panel {
-        background-color: #222;
-        padding: 10px;
-        overflow-y: auto;
-    }
-
-    /* Upgrade Buttons */
-    .upgrade-button {
-    background: linear-gradient(90deg, #00aa00, #00ff00);
-    color: white;
-    border: 2px solid #009900;
-    font-weight: bold;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 255, 0, 0.4);
+/* Right Panel: Ensure it scales properly */
+#right-panel {
+    background-color: #222;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures buttons are centered */
+    justify-content: flex-start;
+    width: 100%; /* Ensures the panel takes its full grid space */
+    max-width: 25vw; /* Keeps it proportional to the screen */
+    height: 100%;
+    overflow-y: auto; /* Enables scrolling if needed */
+    position: relative;
 }
 
+
+/* Upgrade Button (Background Image) */
+
+.upgrade-button {
+    position: relative;
+    background-size: contain !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-color: white !important;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 8 / 3;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 3px solid red; /* TEMP: Make sure it's visible */
+    z-index: 9999;
+}
+
+
+
+
+
+
+/* Upgrade Button Text Overlay */
+.upgrade-text {
+    position: absolute;
+    left: 530px; /* Matches x1 */
+    top: 30px;  /* Matches y1 */
+    width: 255px; /* x2 - x1 */
+    height: 135px; /* y2 - y1 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    pointer-events: none; /* Ensures clicks only go to the button */
+}
+
+/* Header Title Styling */
+.upgrade-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: yellow;
+    margin-bottom: 5px;
+}
+
+/* Cost & Number Owned Text */
+.upgrade-info {
+    font-size: 18px;
+    color: white;
+}
 
 
     .upgrade-button:hover {
@@ -118,6 +173,24 @@
         color: #bbb;
         cursor: not-allowed;
     }
+
+    #upgrade-list .upgrade-button {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 8 / 3;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
 
     /* Lawn Click Effect */
     .lawn-click {
@@ -157,7 +230,8 @@
         <div class="header-text">
             💰 Cash: <span id="cash-display">0</span> | 🏡 Mows: <span id="mow-count">0</span>
         </div>
-        <button class="upgrade-button">⚙️ Settings</button>
+        <button class="settings-button">⚙️ Settings</button>
+
     </header>
 
     <!-- GAME LAYOUT -->
