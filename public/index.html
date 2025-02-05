@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lawn Care Clicker</title>
     <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/gameStats.js"></script>
+
     <!-- Modern Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
@@ -46,12 +48,13 @@
 
     /* Grid Layout */
     #game-container {
-        display: grid;
-        grid-template-columns: 25% 50% 25%;
-        width: 100vw;
-        height: 100vh;
-        padding-top: 60px; /* Offset for header */
-    }
+    display: grid;
+    grid-template-columns: 25% 40% 35%;  /* Column 2 is smaller and Column 3 is wider */
+    width: 100vw;
+    height: 100vh;
+    padding-top: 60px; /* Offset for header */
+}
+
 
     /* Left Panel (Achievements & Shop) */
     #left-panel {
@@ -98,11 +101,12 @@
     align-items: center; /* Ensures buttons are centered */
     justify-content: flex-start;
     width: 100%; /* Ensures the panel takes its full grid space */
-    max-width: 25vw; /* Keeps it proportional to the screen */
+    /* max-width: 25vw;  Removed to allow full use of column space */
     height: 100%;
     overflow-y: auto; /* Enables scrolling if needed */
     position: relative;
 }
+
 
 
 /* Upgrade Button (Background Image) */
@@ -114,9 +118,9 @@
     background-repeat: no-repeat !important;
     background-color: white !important;
     width: 100%;
-    max-width: 800px;
+    max-width: none;  /* Removed fixed width limit */
     aspect-ratio: 8 / 3;
-    height: 150px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,11 +134,12 @@
 
 
 
+
 /* Upgrade Button Text Overlay */
 .upgrade-text {
     position: absolute;
-    left: 530px; /* Matches x1 */
-    top: 30px;  /* Matches y1 */
+    left: 420px; /* Matches x1 */
+    top: 10px;  /* Matches y1 */
     width: 255px; /* x2 - x1 */
     height: 135px; /* y2 - y1 */
     display: flex;
@@ -150,7 +155,7 @@
 
 /* Header Title Styling */
 .upgrade-title {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     color: yellow;
     margin-bottom: 5px;
@@ -177,7 +182,7 @@
     #upgrade-list .upgrade-button {
     position: relative;
     width: 100%;
-    max-width: 800px;
+    max-width: none;  /* Removed fixed width limit */
     aspect-ratio: 8 / 3;
     background-size: cover;
     background-position: center;
@@ -190,6 +195,7 @@
     text-align: center;
     cursor: pointer;
 }
+
 
 
     /* Lawn Click Effect */
@@ -261,7 +267,16 @@
         </div>
     </div>
 
-    <script type="module" src="/src/main.js"></script>
+    <!-- SETTINGS MODAL (Hidden by Default) -->
+<div id="settings-modal" style="display:none; position: fixed; top: 20%; left: 35%; width: 30%; padding: 20px; background: #333; border: 2px solid #555; z-index: 101;">
+    <h3>Settings</h3>
+    <button id="save-game">Save Game</button>
+    <button id="reset-game">Reset Game</button>
+    <button id="close-settings">Close</button>
+</div>
+
+
+
 </body>
 
 
