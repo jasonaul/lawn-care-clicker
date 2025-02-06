@@ -9,6 +9,7 @@ export const upgrades = [
       cost: 10,
       cashPerClick: 1,  // each unit adds +$1 per click
       count: 0,
+      priceIncrease: 1.15,
       image: '/assets/upgrades/better_mower.png'
     },
     {
@@ -18,6 +19,7 @@ export const upgrades = [
       cost: 50,
       cashPerClick: 2,  // each unit adds +$2 per click
       count: 0,
+      priceIncrease: 1.15,
       image: '/assets/upgrades/electric_mower.png'
     },
     {
@@ -27,6 +29,7 @@ export const upgrades = [
       cost: 200,
       cashPerClick: 5,  // each unit adds +$5 per click
       count: 0,
+      priceIncrease: 1.15,
       image: '/assets/upgrades/riding_mower.png'
     },
     // (Index 3: Special Auto Upgrade – Employee)
@@ -39,6 +42,7 @@ export const upgrades = [
       // The cash earned per auto mow will equal the sum of Better, Electric, and Riding counts.
       baseMows: 1,
       count: 0,
+      priceIncrease: 1.15,
       image: '/assets/upgrades/employee.png'
     },
     // (Indices 4-13: Auto Upgrades with Exponential scaling)
@@ -52,6 +56,7 @@ export const upgrades = [
       // Base cash per mow is $1; this will be multiplied by your equipment factor.
       baseCash: 1,
       count: 0,
+      priceIncrease: 1.25,
       image: '/assets/upgrades/precision_pruners.png'
     },
     {
@@ -62,6 +67,7 @@ export const upgrades = [
       baseMows: 15,
       baseCash: 1.2,
       count: 0,
+      priceIncrease: 1.25,
       image: '/assets/upgrades/lawn_llama.png'
     },
     {
@@ -72,6 +78,7 @@ export const upgrades = [
       baseMows: 50,
       baseCash: 1.5,
       count: 0,
+      priceIncrease: 1.3,
       image: '/assets/upgrades/grass_guru.png'
     },
     {
@@ -82,6 +89,7 @@ export const upgrades = [
       baseMows: 150,
       baseCash: 2,
       count: 0,
+      priceIncrease: 1.3,
       image: '/assets/upgrades/sod_slayer.png'
     },
     {
@@ -92,6 +100,7 @@ export const upgrades = [
       baseMows: 500,
       baseCash: 2.5,
       count: 0,
+      priceIncrease: 1.35,
       image: '/assets/upgrades/turbo_trimmer.png'
     },
     {
@@ -102,6 +111,7 @@ export const upgrades = [
       baseMows: 2000,
       baseCash: 3,
       count: 0,
+      priceIncrease: 1.35,
       image: '/assets/upgrades/orbiting_overseer.png'
     },
     {
@@ -112,6 +122,7 @@ export const upgrades = [
       baseMows: 10000,
       baseCash: 3.5,
       count: 0,
+      priceIncrease: 1.4,
       image: '/assets/upgrades/mega_mulcher.png'
     },
     {
@@ -122,6 +133,7 @@ export const upgrades = [
       baseMows: 50000,
       baseCash: 4,
       count: 0,
+      priceIncrease: 1.4,
       image: '/assets/upgrades/hyper_horticulturist.png'
     },
     {
@@ -132,6 +144,7 @@ export const upgrades = [
       baseMows: 250000,
       baseCash: 4.5,
       count: 0,
+      priceIncrease: 1.45,
       image: '/assets/upgrades/quantum_quencher.png'
     },
     {
@@ -142,6 +155,7 @@ export const upgrades = [
       baseMows: 1000000,
       baseCash: 5,
       count: 0,
+      priceIncrease: 1.45,
       image: '/assets/upgrades/cosmic_cultivator.png'
     }
   ];
@@ -191,8 +205,8 @@ export const upgrades = [
     if (window.cash >= upgrade.cost) {
       window.cash -= upgrade.cost;
       upgrade.count++;
-      // Increase cost exponentially, as in Cookie Clicker.
-      upgrade.cost = Math.floor(upgrade.baseCost * Math.pow(1.15, upgrade.count));
+      // Increase cost exponentially using the defined priceIncrease multiplier.
+      upgrade.cost = Math.floor(upgrade.baseCost * Math.pow(upgrade.priceIncrease, upgrade.count));
   
       if (upgrade.type === "click") {
         // For click upgrades, add to cashPerClick.
