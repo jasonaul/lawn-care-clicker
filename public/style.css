@@ -1,0 +1,201 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1b1b1b;
+    color: white;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* HEADER */
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(90deg, #003300, #005500);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.header-text {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+/* GAME LAYOUT */
+#game-container {
+    display: grid;
+    grid-template-columns: 25% 40% 35%;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 60px; /* Offset for header */
+}
+
+.panel {
+    background-color: #222;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+#left-panel {
+    border-right: 2px solid #444;
+}
+
+#middle-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#right-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Headings in panels */
+.panel h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+}
+
+/* Item Lists in panels */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Spacing between items */
+}
+
+/* Lawn Container */
+#lawn-container {
+    width: 80%;
+    height: 80%;
+    max-width: 500px;
+    max-height: 500px;
+    background-color: #36d700; /* Placeholder color, Phaser will render here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #555; /* Example border for visibility */
+}
+
+/* Upgrade/Boost/Product Button Styling */
+.upgrade-button, .boost-button, .product {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    aspect-ratio: 8 / 3;
+    /* Ensure a minimum height for clickability */
+    min-height: 80px; /* Adjust this value as needed */
+    border: 2px solid #555;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    display: flex; /* Use flexbox to better control content layout */
+    flex-direction: column; /* Stack text elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center;    /* Center content horizontally */
+    padding: 10px;         /* Add some padding around the content */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.upgrade-button:hover, .boost-button:hover, .product:hover {
+    transform: scale(1.05);
+}
+
+.upgrade-button:disabled, .boost-button:disabled, .product:disabled {
+    background: #555;
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+.upgrade-text, .boost-text, .product-text {
+    /* Removed absolute positioning to allow flexbox to manage layout */
+    position: relative; /* Use relative for text overlay now */
+    width: 100%;       /* Take full width of the button */
+    height: auto;      /* Height adjusts to content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 18px; /* Slightly smaller font for better fit */
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5px;      /* Add padding to the text overlay itself */
+    box-sizing: border-box;
+}
+
+.upgrade-title, .boost-title, .product-name {
+    font-size: 20px; /* Title font size */
+    margin-bottom: 2px; /* Reduce margin */
+    line-height: 1.1; /* Improve line spacing for titles */
+}
+
+.upgrade-info, .boost-info, .product-price, .product-owned {
+    font-size: 14px; /* Information font size */
+    line-height: 1.1; /* Improve line spacing for info text */
+}
+
+/* Lawn click effect animation */
+.lawn-click {
+    position: absolute;
+    color: #ffcc00;
+    font-size: 24px;
+    font-weight: bold;
+    animation: popUp 1s ease-out forwards;
+}
+
+@keyframes popUp {
+    0%   { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-50px); opacity: 0; }
+}
+
+/* Modals */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content, .modal {
+    position: relative; /* To allow absolute positioning of close button if needed */
+    padding: 20px;
+    background: #333;
+    border: 2px solid #555;
+    border-radius: 5px;
+    min-width: 300px;
+    color: white;
+}
+
+#settings-modal {
+    display: none; /* Hidden by default, controlled by JS */
+    position: fixed;
+    top: 20%;
+    left: 35%;
+    width: 30%;
+    z-index: 101; /* Ensure it's above the overlay if used */
+}

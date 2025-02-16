@@ -3,281 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawn Care Clicker</title>
-    <script type="module" src="/src/main.js"></script>
-    <script type="module" src="/src/gameStats.js"></script>
-
-    <!-- Modern Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-<!-- Font Awesome (for icons) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
-<!-- Modern UI Styling -->
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Montserrat', sans-serif;
-        background-color: #1b1b1b;
-        color: white;
-        overflow: hidden;
-    }
-
-    /* Header Bar */
-    #header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        height: 60px;
-        background: linear-gradient(90deg, #003300, #005500);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 20px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        z-index: 100;
-    }
-
-    .header-text {
-        font-size: 20px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        color: #fff;
-    }
-
-    /* Grid Layout */
-    #game-container {
-    display: grid;
-    grid-template-columns: 25% 40% 35%;  /* Column 2 is smaller and Column 3 is wider */
-    width: 100vw;
-    height: 100vh;
-    padding-top: 60px; /* Offset for header */
-}
-
-
-    /* Left Panel (Achievements & Shop) */
-    #left-panel {
-        background-color: #222;
-        padding: 10px;
-        border-right: 2px solid #444;
-        overflow-y: auto;
-    }
-
-    /* Middle Panel (Lawn & Click Area) */
-    #middle-panel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-#lawn-container {
-    width: 80%;   /* ✅ Make it responsive */
-    height: 80%;
-    max-width: 500px;  /* ✅ Keep it a reasonable size */
-    max-height: 500px;
-    background-color: #36d700;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-#left-panel, #right-panel {
-    pointer-events: auto; /* ✅ Ensures UI elements can be clicked */
-}
-
-/* Right Panel: Ensure it scales properly */
-#right-panel {
-    background-color: #222;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Ensures buttons are centered */
-    justify-content: flex-start;
-    width: 100%; /* Ensures the panel takes its full grid space */
-    /* max-width: 25vw;  Removed to allow full use of column space */
-    height: 100%;
-    overflow-y: auto; /* Enables scrolling if needed */
-    position: relative;
-}
-
-
-
-/* Upgrade Button (Background Image) */
-
-.upgrade-button {
-    position: relative;
-    background-size: contain !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-color: white !important;
-    width: 100%;
-    max-width: none;  /* Removed fixed width limit */
-    aspect-ratio: 8 / 3;
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    border: 3px solid red; /* TEMP: Make sure it's visible */
-    z-index: 9999;
-}
-
-
-
-
-
-
-
-/* Upgrade Button Text Overlay */
-.upgrade-text {
-    position: absolute;
-    left: 420px; /* Matches x1 */
-    top: 10px;  /* Matches y1 */
-    width: 255px; /* x2 - x1 */
-    height: 135px; /* y2 - y1 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-    pointer-events: none; /* Ensures clicks only go to the button */
-}
-
-/* Header Title Styling */
-.upgrade-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: yellow;
-    margin-bottom: 5px;
-}
-
-/* Cost & Number Owned Text */
-.upgrade-info {
-    font-size: 18px;
-    color: white;
-}
-
-
-    .upgrade-button:hover {
-        background: linear-gradient(90deg, #00aa00, #00cc00);
-        transform: scale(1.05);
-    }
-
-    .upgrade-button:disabled {
-        background: #555;
-        color: #bbb;
-        cursor: not-allowed;
-    }
-
-    #upgrade-list .upgrade-button {
-    position: relative;
-    width: 100%;
-    max-width: none;  /* Removed fixed width limit */
-    aspect-ratio: 8 / 3;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-}
-
-
-
-    /* Lawn Click Effect */
-    .lawn-click {
-        position: absolute;
-        color: #ffcc00;
-        font-size: 20px;
-        font-weight: bold;
-        animation: popUp 1s ease-out forwards;
-    }
-
-    @keyframes popUp {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-50px); opacity: 0; }
-    }
-
-    /* Button Hover Effects */
-.upgrade-button:hover {
-    background: linear-gradient(90deg, #00cc00, #00ff00);
-    transform: scale(1.05);
-    transition: 0.2s ease-in-out;
-}
-
-/* Click Animation */
-@keyframes buttonClick {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.95); }
-    100% { transform: scale(1); }
-}
-
-</style>
-
+    <title>Lawn Care Clicker Deluxe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- HEADER -->
     <header id="header">
-        <div class="header-text">🚜 Lawn Care Clicker - Phaser 3</div>
+        <div class="header-text">🚜 Lawn Care Clicker Deluxe - Phaser 3</div>
         <div class="header-text">
-            💰 Cash: <span id="cash-display">0</span> | 🏡 Mows: <span id="mow-count">0</span>
+            💰 Cash: <span id="cash-display">0</span> | 🏡 Mows: <span id="mow-count">0</span> | 🌟 Prestige: <span id="prestige-points">0</span>
         </div>
-        <button class="settings-button">⚙️ Settings</button>
-
+        <div>
+            <button class="settings-button">⚙️ Settings</button>
+            <button id="prestige-button">🔥 Prestige</button>
+        </div>
     </header>
 
-    <!-- GAME LAYOUT -->
-    <div id="game-container">
-
-
-        <!-- LEFT PANEL (Achievements & Shop) -->
-<div id="left-panel">
-    <h2>🏆 Achievements</h2>
-    <div id="achievement-list"></div>
-
-    <h2>🛒 Shop</h2>
-    <div id="shop-list"></div> <!-- ✅ Add this -->
-</div>
-
-<!-- MIDDLE PANEL (Now with a dedicated Lawn Container) -->
-<div id="middle-panel">
-    <div id="lawn-container"></div>  <!-- ✅ Phaser only attaches here -->
-</div>
-
-
-
-        <!-- RIGHT PANEL (Upgrades) -->
-        <div id="right-panel">
-            <h2>🔧 Upgrades</h2>
-            <div id="upgrade-list"></div> <!-- ✅ Add this -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div id="modal-content" class="modal-content">
+            <!-- Modal content will be loaded here by JavaScript -->
         </div>
     </div>
 
-    <!-- SETTINGS MODAL (Hidden by Default) -->
-<div id="settings-modal" style="display:none; position: fixed; top: 20%; left: 35%; width: 30%; padding: 20px; background: #333; border: 2px solid #555; z-index: 101;">
-    <h3>Settings</h3>
-    <button id="save-game">Save Game</button>
-    <button id="reset-game">Reset Game</button>
-    <button id="close-settings">Close</button>
-</div>
+    <div id="game-container">
+        <div id="left-panel" class="panel">
+            <h2>🏆 Achievements</h2>
+            <div id="achievement-list" class="item-list"></div>
+            <h2>🛒 Shop</h2>
+            <div id="shop-list" class="item-list"></div>
+        </div>
 
+        <div id="middle-panel" class="panel">
+            <div id="lawn-container"></div>
+        </div>
 
+        <div id="right-panel" class="panel">
+            <h2>🔧 Upgrades</h2>
+            <div id="upgrade-list" class="item-list"></div>
+            <h2>🚀 Boosts</h2>
+            <div id="boost-list" class="item-list"></div>
+            <h2>🏢 Buildings</h2>
+            <div id="products" class="item-list"></div>
+        </div>
+    </div>
 
+    <div id="settings-modal" class="modal">
+        <h3>Settings</h3>
+        <button id="save-game">Save Game</button>
+        <button id="reset-game">Reset Game</button>
+        <button id="close-settings">Close</button>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
 </body>
-
-
 </html>
