@@ -1,3 +1,5 @@
+import { defineConfig } from 'vite';
+
 export default defineConfig({
   root: 'public/', // Set root to 'public/'
   publicDir: 'public', // Explicitly set publicDir
@@ -16,11 +18,8 @@ export default defineConfig({
   server: {
     port: 3000, // Development server port
     open: true,  // Automatically open browser on start
-    // proxy: { // Example proxy configuration (if needed)
-    //   '/api': 'http://localhost:8080',
-    // },
   },
   optimizeDeps: {
     include: ['phaser'], // Optimize Phaser during development
   },
-})
+});

@@ -30,7 +30,7 @@ export function applyOfflineProgress() {
         const offlineMinutes = Math.floor((offlineTimeSeconds % 3600) / 60);
         const offlineSeconds = Math.floor(offlineTimeSeconds % 60);
 
-        let offlineMessage = `Welcome back! While you were away for ${offlineHours}h ${offlineMinutes}m ${offlineSeconds}s, your employees mowed the lawn and earned you $${Beautify(offlineCash)} and ${Beautify(offlineMows)} mows.`;
+        let offlineMessage = `Welcome back! While you were away for ${offlineHours}h ${offlineMinutes}m ${offlineSeconds}s, your employees mowed the lawn and earned you ${Beautify(offlineCash, true)} and ${Beautify(offlineMows)} mows.`; // isCash true for cash
         Game.notify(offlineMessage, 'offline', 5000); // Show longer notification for offline progress
         console.log("Applied offline progress:", offlineMessage);
     }

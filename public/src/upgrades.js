@@ -5,7 +5,7 @@ import { checkAchievements } from './achievements.js';
 import { Beautify } from './game.js'; // Import Beautify function
 
 export const upgrades = [
-    // Click Upgrades
+    // Click Upgrades (Slightly Adjusted Ramps, Costs mostly same)
     {
         id: 0,
         name: "Better Mower",
@@ -14,8 +14,8 @@ export const upgrades = [
         cost: 10,
         mowsPerClick: 1,
         count: 0,
-        priceIncrease: 1.15,
-        image: "/assets/upgrades/better_mower.png",
+        priceIncrease: 1.18,
+        image: "/assets/upgrades/better_mower.png", // Placeholder
         unlocked: 1,
         buildingTie: null,
         tier: 0,
@@ -24,57 +24,57 @@ export const upgrades = [
         id: 1,
         name: "Electric Mower",
         type: "click",
-        baseCost: 50,
-        cost: 50,
+        baseCost: 75,
+        cost: 75,
         mowsPerClick: 2,
-        count: 0,
-        priceIncrease: 1.15,
-        image: "/assets/upgrades/electric_mower.png",
+        count: 0,         // Number of times purchased
+        priceIncrease: 1.22, // Slightly Increased ramp
+        image: "/assets/upgrades/electric_mower.png", // Placeholder
         unlocked: 0,
         tier: 0,
         buildingTie: null,
-        unlockCondition: () => Game.mowClicks >= 50,
+        unlockCondition: () => Game.mowClicks >= 75,
     },
     {
         id: 2,
         name: "Riding Mower",
         type: "click",
-        baseCost: 200,
-        cost: 200,
+        baseCost: 300,
+        cost: 300,
         mowsPerClick: 5,
-        count: 0,
-        priceIncrease: 1.15,
-        image: "/assets/upgrades/riding_mower.png",
+        count: 0,         // Number of times purchased
+        priceIncrease: 1.28, // Slightly Increased ramp
+        image: "/assets/upgrades/riding_mower.png", // Placeholder
         unlocked: 0,
         tier: 0,
         buildingTie: null,
-        unlockCondition: () => Game.mowClicks >= 200,
+        unlockCondition: () => Game.mowClicks >= 300,
     },
     {
         id: 3,
         name: "Turbocharged Clippers",
         type: "click",
-        baseCost: 1000,
-        cost: 1000,
+        baseCost: 1500,
+        cost: 1500,
         mowsPerClick: 10,
-        count: 0,
-        priceIncrease: 1.2,
+        count: 0,         // Number of times purchased
+        priceIncrease: 1.33, // Slightly Increased ramp
         image: "/assets/upgrades/turbo_clippers.png", // Placeholder
         unlocked: 0,
         tier: 0,
         buildingTie: null,
-        unlockCondition: () => Game.mowClicks >= 1000,
+        unlockCondition: () => Game.mowClicks >= 1500,
     },
-    // Buildings
+    // Buildings (Slightly Adjusted Costs)
     {
         id: 3,
         name: "Employee",
         type: "building",
-        baseCost: 500,
-        cost: 500,
+        baseCost: 900,     // Slightly increased base cost
+        cost: 900,
         baseBlades: 1,
         cps: function() { return this.baseBlades * this.amount; },
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.15,
         image: "/assets/upgrades/employee.png",
@@ -86,11 +86,11 @@ export const upgrades = [
         id: 4,
         name: "Precision Pruners",
         type: "building",
-        baseCost: 2500,
-        cost: 2500,
+        baseCost: 4500,    // Slightly increased base cost
+        cost: 4500,
         baseBlades: 5,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.25,
         image: "/assets/upgrades/precision_pruners.png",
@@ -102,11 +102,11 @@ export const upgrades = [
         id: 5,
         name: "Lawn Llama",
         type: "building",
-        baseCost: 10000,
-        cost: 10000,
+        baseCost: 14000,
+        cost: 14000,
         baseBlades: 15,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.25,
         image: "/assets/upgrades/lawn_llama.png",
@@ -118,11 +118,11 @@ export const upgrades = [
         id: 6,
         name: "Grass Guru",
         type: "building",
-        baseCost: 50000,
-        cost: 50000,
+        baseCost: 70000,
+        cost: 70000,
         baseBlades: 50,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.3,
         image: "/assets/upgrades/grass_guru.png",
@@ -134,11 +134,11 @@ export const upgrades = [
         id: 7,
         name: "Sod Slayer",
         type: "building",
-        baseCost: 200000,
-        cost: 200000,
+        baseCost: 300000,
+        cost: 300000,
         baseBlades: 150,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.3,
         image: "/assets/upgrades/sod_slayer.png",
@@ -150,11 +150,11 @@ export const upgrades = [
         id: 8,
         name: "Turbo Trimmer",
         type: "building",
-        baseCost: 1000000,
-        cost: 1000000,
+        baseCost: 1500000,
+        cost: 1500000,
         baseBlades: 500,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.35,
         image: "/assets/upgrades/turbo_trimmer.png",
@@ -166,11 +166,11 @@ export const upgrades = [
         id: 9,
         name: "Orbiting Overseer",
         type: "building",
-        baseCost: 5000000,
-        cost: 5000000,
+        baseCost: 8000000,
+        cost: 8000000,
         baseBlades: 2000,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.35,
         image: "/assets/upgrades/orbiting_overseer.png",
@@ -182,11 +182,11 @@ export const upgrades = [
         id: 10,
         name: "Mega Mulcher",
         type: "building",
-        baseCost: 25000000,
-        cost: 25000000,
+        baseCost: 40000000,
+        cost: 40000000,
         baseBlades: 10000,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.4,
         image: "/assets/upgrades/mega_mulcher.png",
@@ -198,11 +198,11 @@ export const upgrades = [
         id: 11,
         name: "Hyper Horticulturist",
         type: "building",
-        baseCost: 100000000,
-        cost: 100000000,
+        baseCost: 150000000,
+        cost: 150000000,
         baseBlades: 50000,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.4,
         image: "/assets/upgrades/hyper_horticulturist.png",
@@ -214,11 +214,11 @@ export const upgrades = [
         id: 12,
         name: "Quantum Quencher",
         type: "building",
-        baseCost: 500000000,
-        cost: 500000000,
+        baseCost: 800000000,
+        cost: 800000000,
         baseBlades: 250000,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.45,
         image: "/assets/upgrades/quantum_quencher.png",
@@ -230,11 +230,11 @@ export const upgrades = [
         id: 13,
         name: "Cosmic Cultivator",
         type: "building",
-        baseCost: 2500000000,
-        cost: 2500000000,
+        baseCost: 4000000000,
+        cost: 4000000000,
         baseBlades: 1000000,
         cps: function(){return this.baseBlades * this.amount;},
-        count: 0,
+        count: 0,         // Number of times purchased
         amount: 0,
         priceIncrease: 1.45,
         image: "/assets/upgrades/cosmic_cultivator.png",
@@ -242,14 +242,14 @@ export const upgrades = [
         tier: 0,
         buildingTie: null,
     },
-    // New Buildings Below:
+    // New Buildings Below: (Costs Remain the Same for now)
     {
         id: 18,
         name: "Robo Mower",
         type: "building",
-        baseCost: 10000000000,
-        cost: 10000000000,
-        baseBlades: 5000000,
+        baseCost: 15000000000,
+        cost: 15000000000,
+        baseBlades: 4000000,
         cps: function(){return this.baseBlades * this.amount;},
         count: 0,
         amount: 0,
@@ -263,9 +263,9 @@ export const upgrades = [
         id: 19,
         name: "Drone Sprinkler",
         type: "building",
-        baseCost: 50000000000,
-        cost: 50000000000,
-        baseBlades: 25000000,
+        baseCost: 75000000000,
+        cost: 75000000000,
+        baseBlades: 20000000,
         cps: function(){return this.baseBlades * this.amount;},
         count: 0,
         amount: 0,
@@ -274,15 +274,15 @@ export const upgrades = [
         unlocked: 0, // Start locked, unlock condition can be added later
         tier: 0,
         buildingTie: null,
-        unlockCondition: () => Game.Objects['Robo Mower'] && Game.Objects['Robo Mower'].amount >= 10, // Example unlock condition
+        unlockCondition: () => Game.Objects['Robo Mower'] && Game.Objects['Robo Mower'].amount >= 10,
     },
     {
         id: 20,
         name: "Hedgehog Army",
         type: "building",
-        baseCost: 250000000000,
-        cost: 250000000000,
-        baseBlades: 100000000,
+        baseCost: 400000000000,
+        cost: 400000000000,
+        baseBlades: 80000000,
         cps: function(){return this.baseBlades * this.amount;},
         count: 0,
         amount: 0,
@@ -297,9 +297,9 @@ export const upgrades = [
         id: 21,
         name: "Genetically Modified Grass",
         type: "building",
-        baseCost: 1000000000000,
-        cost: 1000000000000,
-        baseBlades: 500000000,
+        baseCost: 2000000000000,
+        cost: 2000000000000,
+        baseBlades: 400000000,
         cps: function(){return this.baseBlades * this.amount;},
         count: 0,
         amount: 0,
@@ -310,17 +310,17 @@ export const upgrades = [
         buildingTie: null,
         unlockCondition: () => Game.Objects['Hedgehog Army'] && Game.Objects['Hedgehog Army'].amount >= 10,
     },
-    // Building Tiered Upgrades - Employee
+    // Building Tiered Upgrades - Employee (Significantly Increased Ramps & Costs)
     {
         id: 14,
         name: "Employee Training",
         type: "upgrade",
-        baseCost: 1000,
-        cost: 1000,
+        baseCost: 15000,    // Increased base cost
+        cost: 15000,
         buildingTie: "Employee",
         tier: 1,
         unlocked: 0,
-        priceIncrease: 1.5,
+        priceIncrease: 1.8,   // Increased ramp
         mpsMultiplier: 2,
         image: "/assets/upgrades/employee_training.png",
         count: 0,
@@ -338,16 +338,16 @@ export const upgrades = [
         id: 15,
         name: "Employee Motivation",
         type: "upgrade",
-        baseCost: 5000,
-        cost: 5000,
+        baseCost: 100000,  // Significantly increased base cost
+        cost: 100000,
         buildingTie: "Employee",
         tier: 10,
         unlocked: 0,
-        priceIncrease: 1.6,
-        mpsMultiplier: 2.5,
+        priceIncrease: 2.0,   // Greatly Increased ramp
+        mpsMultiplier: 2.25, // Slightly reduced multiplier from 2.5 to 2.25
         image: "/assets/upgrades/employee_motivation.png",
         count: 0,
-        desc: "Employees are 2.5x more efficient.",
+        desc: "Employees are 2.25x more efficient.", // Adjusted description to reflect new multiplier
         unlockCondition: () => Game.Objects['Employee'] && Game.Objects['Employee'].amount >= 10,
         applyEffect: function() {
             if (Game.Objects['Employee']) {
@@ -357,17 +357,17 @@ export const upgrades = [
             }
         }
     },
-    // Building Tiered Upgrades - Precision Pruners
+    // Building Tiered Upgrades - Precision Pruners (Increased Ramps & Costs)
     {
         id: 16,
         name: "Pruning Shears Sharpening",
         type: "upgrade",
-        baseCost: 7500,
-        cost: 7500,
+        baseCost: 12000,   // Increased base cost
+        cost: 12000,
         buildingTie: "Precision Pruners",
         tier: 5,
         unlocked: 0,
-        priceIncrease: 1.55,
+        priceIncrease: 1.70, // Increased ramp
         mpsMultiplier: 2,
         image: "/assets/upgrades/pruning_shears_sharpening.png", // Placeholder
         count: 0,
@@ -381,26 +381,26 @@ export const upgrades = [
             }
         }
     },
-     // Building Tiered Upgrades - Lawn Llama
+     // Building Tiered Upgrades - Lawn Llama (Increased Ramps & Costs)
     {
         id: 17,
         name: "Llama Feed Optimization",
         type: "upgrade",
-        baseCost: 50000,
-        cost: 50000,
+        baseCost: 80000,   // Increased base cost
+        cost: 80000,
         buildingTie: "Lawn Llama",
         tier: 5,
         unlocked: 0,
-        priceIncrease: 1.6,
+        priceIncrease: 1.8, // Increased ramp
         mpsMultiplier: 2,
         image: "/assets/upgrades/llama_feed_optimization.png", // Placeholder
         count: 0,
         desc: "Lawn Llamas are twice as efficient.",
-        unlockCondition: () => Game.Objects['Lawn Llama'] && Game.Objects['Lawn Llama'].amount >= 5,
+        unlockCondition: () => Game.Objects['Lawn Llama'] && Game.Objects['Llama Llama'].amount >= 5,
         applyEffect: function() {
-            if (Game.Objects['Lawn Llama']) {
-                Game.Objects['Lawn Llama'].baseBlades *= this.mpsMultiplier;
-                Game.Objects['Lawn Llama'].baseCps = Game.Objects['Lawn Llama'].cps();
+            if (Game.Objects['Llama Llama']) {
+                Game.Objects['Llama Llama'].baseBlades *= this.mpsMultiplier;
+                Game.Objects['Llama Llama'].baseCps = Game.Objects['Llama Llama'].cps();
                 Game.recalculateGains = 1;
             }
         }
@@ -449,7 +449,7 @@ export function renderUpgrades() {
             overlay.classList.add("upgrade-text");
             overlay.innerHTML = `
                 <div class="upgrade-title">${upgrade.name}</div>
-                <div class="upgrade-info">Cost: $${Beautify(upgrade.cost)}</div>
+                <div class="upgrade-info">Cost: ${Beautify(upgrade.cost, true)}</div>
                 <div class="upgrade-info">Owned: ${upgrade.count}</div>
             `;
             btn.appendChild(overlay);

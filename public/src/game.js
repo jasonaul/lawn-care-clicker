@@ -256,7 +256,7 @@ export const Game = {
     },
 
     UpdateCashDisplay: function() {
-        document.getElementById("cash-display").textContent = Beautify(this.cash);
+        document.getElementById("cash-display").textContent = Beautify(this.cash, true);
     },
 
     UpdateMowCountDisplay: function() {
@@ -362,24 +362,49 @@ export const Game = {
 };
 
 // Helper function to beautify numbers
-function Beautify(val) {
+function Beautify(value, isCash = false) {
     var notations = ['', 'k', 'M', 'B', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No', 'Dc', 'UDc', 'DDc', 'TDc', 'QaDc', 'QiDc', 'SxDc', 'SpDc', 'ODc', 'NDc'];
+    var fullNotations = ['', ' thousand', ' million', ' billion', ' trillion', ' quadrillion', ' quintillion', ' sextillion', ' septillion', ' octillion', ' nonillion', ' decillion', ' undecillion', ' duodecillion', ' tredecillion', ' quattuordecillion', ' quindecillion', ' sexdecillion', ' septendecillion', ' octodecillion', ' novemdecillion', ' vigintillion'];
     var notation = '';
     var base = 0;
-    if (!isFinite(val)) return 'Infinity';
-    if (val >= 1000) {
-        val /= 1000;
-        while (Math.round(val) >= 1000) {
-            val /= 1000;
-            base++;
-        }
-        if (base >= notations.length) {
-            return 'Infinity';
-        } else {
-            notation = notations[base];
-        }
+    let prefix = isCash ? '$' : ''; // Add dollar sign prefix for cash
+    let formattedValue; // Declare formattedValue here, outside if block
+
+    console.log("Beautify Input Value:", value, "isCash:", isCash); // Debug log - input value
+
+    console.log("Before < 1000 check:", value); // NEW DEBUG LOG - BEFORE < 1000 CHECK
+    if (!isFinite(value)) return prefix + 'Infinity';
+
+    if (value < 1000) {
+        console.log("Inside < 1000 block:", value); // NEW DEBUG LOG - INSIDE < 1000 BLOCK
+        formattedValue = prefix + Math.floor(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Comma formatting for < 1000, no decimals
+    } else if (value < 1000000) { // Handle numbers between 1000 and 1 million with commas
+        console.log("Inside 1000 to < 1 Million block:", value);
+        formattedValue = prefix + Math.floor(value).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Comma formatting for thousands, no decimals
     }
-    return (Math.round(val * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + notation;
+     else {
+        console.log("Before >= 1 Million block:", value); // NEW DEBUG LOG - BEFORE >= 1 Million BLOCK
+        let val = value;
+        val /= 1000000.0; // Scale to millions directly
+
+        while (Math.abs(val) >= 1000) { // Scale for billions, trillions, etc. (beyond millions)
+            console.log("--- Loop Start --- Base:", base, "Value:", val); // Loop start log
+            console.log("Value before scaling:", val, "Base:", base); // Debug log - before scaling in loop
+            if (base >= fullNotations.length - 1) {
+                return prefix + 'Infinity'; // Cap at last notation
+            }
+            val /= 1000.0;
+            console.log("Value after division:", val); // Enhanced debug log - AFTER DIVISION
+            base++;
+            console.log("Value after scaling:", val, "Base:", base); // Debug log - after scaling in loop
+        }
+        console.log("After while loop - Value:", val, "Base:", base, "Notation:", fullNotations[base + 2]); // NEW DEBUG LOG - AFTER WHILE LOOP (Adjusted base index)
+        notation = fullNotations[base + 2]; // Use base+2 to start notations from "million" correctly
+        formattedValue = prefix + val.toFixed(2) + notation; // Format to 2 decimal places + notation
+    }
+
+    console.log("Beautify Output:", formattedValue); // Debug log - output value
+    return formattedValue; // Format to 2 decimal places + notation
 }
 
 export { Beautify };

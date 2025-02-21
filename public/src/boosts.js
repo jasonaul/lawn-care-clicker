@@ -67,7 +67,8 @@ export function renderBoosts() {
           overlay.classList.add("boost-text");
           overlay.innerHTML = `
               <div class="boost-title">${boost.name}</div>
-              <div class="boost-info">Cost: $${Beautify(boost.cost)}</div>
+                 <div class="boost-info">Cost: ${Beautify(boost.cost, true)}</div> 
+
               <div class="boost-info">${boost.description}</div>
           `;
           boostDiv.appendChild(overlay);

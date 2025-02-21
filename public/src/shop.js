@@ -48,7 +48,7 @@ export function renderShop() {
           overlay.classList.add("shop-text");
           overlay.innerHTML = `
               <div class="shop-title">${item.name}</div>
-              <div class="shop-info">Cost: $${Beautify(item.cost)}</div>
+              <div class="shop-info">Cost: ${Beautify(item.cost, true)}</div> 
               <div class="shop-desc">${item.description}</div>
           `;
           shopItemDiv.appendChild(overlay);
